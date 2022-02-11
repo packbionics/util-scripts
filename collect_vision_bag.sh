@@ -1,5 +1,10 @@
 read -p "Enter bag duration in seconds: " duration
 read -p "Enter bag name: " bag_name
+# modify bag_name if directory exists
+if [ -d ~/dev_ws/bag_files/${bag_name} ]; then
+    echo "Directory ~/dev_ws/bag_files/${bag_name} exists. Please enter a new bag name."
+    read -p "Enter bag name: " bag_name
+fi
 read -p "Enter storage machine username: " local_username
 read -p "Enter storage machine ip: " local_ip
 
@@ -36,7 +41,7 @@ abort_script() {
 trap "abort_script" SIGINT SIGTERM
 
 # Wait for recording to finish
-sleep $(( $duration + 5 ))
+sleep $(( $duration + 8 ))
 docker stop $CONTAINER_ID
 
 # Copy bag file to storage machine
@@ -45,5 +50,6 @@ if [ "$?" -eq "0" ];
 then
     echo "Bag file saved to ~/$bag_name on $local_ip"
 else
-    echo "Bag file was NOT saved"
+    sudo rm -r ~/dev_ws/bag_files/$bag_name
+    echo "scp failed, abort
 fi
