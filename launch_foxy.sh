@@ -8,4 +8,4 @@ sudo docker run --gpus all \
                 -v /tmp/argus_socket:/tmp/argus_socket \
                 -v /home/packbionics/dev_ws:/home/packbionics/dev_ws \
                 --cap-add SYS_PTRACE -e DISPLAY=$DISPLAY \
-                -dit dustynv/ros:foxy-slam-l4t-r32.5.0
+                -dit dustynv/ros:foxy-slam-l4t-r32.6.1
