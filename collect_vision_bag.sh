@@ -15,7 +15,7 @@ BACKGROUND_PID=$!
 wait $BACKGROUND_PID
 
 # Find container id
-CONTAINER_ID=$(docker ps --filter ancestor=dustynv/ros:foxy-slam-l4t-r32.6.1 -q)
+CONTAINER_ID=$(docker ps --filter ancestor=packbionics/ros:foxy-slam-l4t-latest -q)
 
 # Start recording bag
 docker exec $CONTAINER_ID bash -c "source ros_entrypoint.sh;\
